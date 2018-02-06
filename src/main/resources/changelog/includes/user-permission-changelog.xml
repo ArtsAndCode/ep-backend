@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+    http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet id="user_permission-02/05/2018-11:58" author="prestige">
+        <createTable tableName="user_permission">
+            <column autoIncrement="true" name="id" type="bigserial" />
+            <column name="user_id" type="bigserial">
+                <constraints nullable="false" />
+            </column>
+            <column name="permission_id" type="bigserial">
+                <constraints nullable="false" />
+            </column>
+            <column name="created_date" type="timestamp without time zone" />
+        </createTable>
+    </changeSet>
+
+    <changeSet author="prestige" id="user_permission-02/05/2018-12:00">
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="user_permission"
+                                 constraintName="fk_user_permission_id"
+                                 deferrable="true"
+                                 initiallyDeferred="true"
+                                 onDelete="CASCADE"
+                                 onUpdate="CASCADE"
+                                 referencedColumnNames="id"
+                                 referencedTableName="role"/>
+    </changeSet>
+
+    <changeSet author="prestige" id="user_permission-02/05/2018-12:09">
+        <addForeignKeyConstraint baseColumnNames="permission_id"
+                                 baseTableName="user_permission"
+                                 constraintName="fk_permission_id"
+                                 deferrable="true"
+                                 initiallyDeferred="true"
+                                 onDelete="CASCADE"
+                                 onUpdate="CASCADE"
+                                 referencedColumnNames="id"
+                                 referencedTableName="permission" />
+    </changeSet>
+
+    <changeSet author="prestige" id="user_permission-02/05/2018-12:12">
+        <addPrimaryKey columnNames="user_id, permission_id"
+                       constraintName="pk_user_permission"
+                       tableName="user_permission" />
+    </changeSet>
+
+    <changeSet author="prestige" id="user_permission-02/06/2018-06:37">
+        <dropForeignKeyConstraint baseTableName="user_permission"
+                                  constraintName="fk_user_permission_id" />
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="user_permission"
+                                 constraintName="fk_user_permission_id"
+                                 deferrable="true"
+                                 initiallyDeferred="true"
+                                 onDelete="CASCADE"
+                                 onUpdate="CASCADE"
+                                 referencedColumnNames="id"
+                                 referencedTableName="auth_user" />
+    </changeSet>
+
+</databaseChangeLog>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+    http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet id="log-11/16/2017-9:53" author="prestige">
+        <createTable tableName="log">
+            <column autoIncrement="true" name="id" type="bigserial">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="log_id_pkey"/>
+            </column>
+            <column name="user_type" type="varchar(25)">
+                <constraints nullable="true" />
+            </column>
+            <column name="user_id" type="bigserial">
+                <constraints nullable="true" />
+            </column>
+            <column name="action" type="TEXT">
+                <constraints nullable="false" />
+            </column>
+            <column name="created_date" type="timestamp without time zone" />
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>

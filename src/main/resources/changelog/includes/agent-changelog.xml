@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+    http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet id="agent-11/13/2017-1:50" author="prestige">
+        <createTable tableName="agent">
+            <column autoIncrement="true" name="id" type="bigserial">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="agent_id_pkey"/>
+            </column>
+            <column name="user_id" type="bigserial">
+                <constraints nullable="false" />
+            </column>
+            <column name="first_name" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="password_changed" type="int" defaultValue="0" />
+            <column name="last_name" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="profile_image" type="varchar(255)" />
+            <column name="state" type="varchar(255)" />
+            <column name="lga" type="varchar(255)" />
+            <column name="town" type="varchar(255)" />
+            <column name="locality" type="varchar(255)" />
+            <column name="street" type="varchar(255)" />
+            <column name="landmark" type="varchar(255)" />
+            <column name="is_super_agent" type="int" />
+            <column name="super_agent_id" type="bigserial" />
+            <column name="wallet_balance" type="double" defaultValue="0" />
+            <column name="alt_mobile_no" type="varchar(20)" />
+            <column name="created_date" type="timestamp without time zone" />
+            <column name="updated_date" type="timestamp without time zone" />
+        </createTable>
+    </changeSet>
+
+    <changeSet author="prestige" id="agent-11/16/2017-03:03">
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="agent"
+                                 constraintName="fk_agent_user_id"
+                                 deferrable="true"
+                                 initiallyDeferred="true"
+                                 onDelete="CASCADE"
+                                 onUpdate="CASCADE"
+                                 referencedColumnNames="id"
+                                 referencedTableName="auth_user"/>
+    </changeSet>
+
+    <changeSet author="prestige" id="agent-1/24/2018">
+        <addColumn tableName="agent">
+            <column name="country" type="varchar(255)"/>
+        </addColumn>
+    </changeSet>
+
+    <changeSet author="prestige" id="agent-1/26/2018">
+        <addColumn tableName="agent">
+            <column name="mobile_verified" type="int" defaultValue="0"/>
+        </addColumn>
+    </changeSet>
+</databaseChangeLog>

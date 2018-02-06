@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+    http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet id="role_permission-11/13/2017-3:56" author="prestige">
+        <createTable tableName="role_permission">
+            <column autoIncrement="true" name="id" type="bigserial" />
+            <column name="role_id" type="bigserial">
+                <constraints nullable="false" />
+            </column>
+            <column name="permission_id" type="bigserial">
+                <constraints nullable="false" />
+            </column>
+            <column name="created_date" type="timestamp without time zone" />
+        </createTable>
+    </changeSet>
+
+    <changeSet author="prestige" id="role_permission-11/13/2017-4:00">
+        <addForeignKeyConstraint baseColumnNames="role_id"
+                                 baseTableName="role_permission"
+                                 constraintName="fk_role_id"
+                                 deferrable="true"
+                                 initiallyDeferred="true"
+                                 onDelete="CASCADE"
+                                 onUpdate="CASCADE"
+                                 referencedColumnNames="id"
+                                 referencedTableName="role"/>
+    </changeSet>
+
+    <changeSet author="prestige" id="role_permission-11/13/2017-4:02">
+        <addForeignKeyConstraint baseColumnNames="permission_id"
+                                 baseTableName="role_permission"
+                                 constraintName="fk_permission_id"
+                                 deferrable="true"
+                                 initiallyDeferred="true"
+                                 onDelete="CASCADE"
+                                 onUpdate="CASCADE"
+                                 referencedColumnNames="id"
+                                 referencedTableName="permission"/>
+    </changeSet>
+
+    <changeSet author="prestige" id="role_permission-11/13/2017-4:05">
+        <addPrimaryKey columnNames="role_id, permission_id"
+                       constraintName="pk_role_permission"
+                       tableName="role_permission" />
+    </changeSet>
+
+</databaseChangeLog>
